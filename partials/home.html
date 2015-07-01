@@ -10,7 +10,7 @@
         <div infinite-scroll='Recipes.nextPage()' infinite-scroll-disabled='Recipes.busy' infinite-scroll-distance='0'>
             <div class="col-md-2" ng-repeat="rec in Recipes.items">
                 <a href="#/home/{{rec.alias}}">
-                    <div class="panel panel-default">
+                    <div class="panel panel-default block">
                         <div class="panel-heading">
                             {{rec.name}}                   
                         </div>

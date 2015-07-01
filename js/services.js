@@ -30,11 +30,14 @@ kulinarServices.factory('Recipes', ['$http',
             var url = "php/index.php?shag=" + this.page;
             $http.get(url).
                     success(function (data, status, headers, config) {
-                        if (data.length > 0) {
-                            this.items = this.items.concat(data);
-                            this.busy = false;
-                            this.page += 1;
-                        }
+                        data = typeof data !== 'undefined' ? data : [];
+                        console.log(data);
+                        if (data != null)
+                            if (data.length > 0) {
+                                this.items = this.items.concat(data);
+                                this.busy = false;
+                                this.page += 1;
+                            }
                     }.bind(this)).
                     error(function (data, status, headers, config) {
 

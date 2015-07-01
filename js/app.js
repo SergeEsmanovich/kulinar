@@ -3,6 +3,7 @@
 /* App Module */
 
 var kulinarApp = angular.module('kulinarApp', [
+//    'ngMock',
     'ngRoute',
     'phonecatAnimations',
     'kulinarControllers',

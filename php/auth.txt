@@ -1,1 +1,1 @@
-{"identity":"http:\/\/vk.com\/id68889220","profile":"http:\/\/vk.com\/id68889220","first_name":"Korol-ariya","uid":"68889220","network":"vkontakte","last_name":"Zaqwsx"}
+{"identity":"https:\/\/plus.google.com\/u\/0\/103603897180461133615\/","first_name":"korol","uid":"103603897180461133615","profile":"https:\/\/plus.google.com\/103603897180461133615","network":"google","last_name":"ariya"}

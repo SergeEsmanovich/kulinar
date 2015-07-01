@@ -1,3 +1,27 @@
 .ng-isolate-scope{
     padding: 0px;
 }
+.block{
+    overflow: hidden;
+    height: 300px;
+    &:hover{
+        -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    }
+    .panel-heading{
+        font-family: 'Lobster', cursive;
+        text-decoration: none;
+    }
+    .panel-body {
+        height: 200px;
+        padding: 5px;
+        overflow: hidden;
+        img{
+            width:100%;
+        }
+    }
+    .panel-footer{
+        height: 60px;
+    }
+}
