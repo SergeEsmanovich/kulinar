@@ -2,9 +2,9 @@
 
 /* Services */
 
-var phonecatServices = angular.module('phonecatServices', ['ngResource']);
+var kulinarServices = angular.module('kulinarServices', ['ngResource']);
 
-phonecatServices.factory('Phone', ['$resource',
+kulinarServices.factory('Phone', ['$resource', '$http',
     function ($resource) {
         //?action=ingredients
         return $resource('phones/:phoneId.json', {}, {
@@ -13,15 +13,34 @@ phonecatServices.factory('Phone', ['$resource',
     }]);
 
 
-var recipesServices = angular.module('recipesServices', ['$http']);
 
-phonecatServices.factory('Recipes', ['$http',
+kulinarServices.factory('Recipes', ['$http',
     function ($http) {
-        var test = {};
-        test.get = function (id) {
-            
-            return {'test':'test'}
+        var service = function () {
+            this.items = [];
+            this.busy = false;
+            this.after = '';
+            this.page = 1;
+        };
+        service.prototype.nextPage = function () {
+            if (this.busy)
+                return;
+            this.busy = true;
+
+            var url = "php/index.php?shag=" + this.page;
+            $http.get(url).
+                    success(function (data, status, headers, config) {
+                        if (data.length > 0) {
+                            this.items = this.items.concat(data);
+                            this.busy = false;
+                            this.page += 1;
+                        }
+                    }.bind(this)).
+                    error(function (data, status, headers, config) {
+
+                    });
+
         };
 
-        return test;
+        return service;
     }]);

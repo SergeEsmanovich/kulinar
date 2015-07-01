@@ -1,5 +1,4 @@
 'use strict';
-
 /*DB*/
 
 //var db = openDatabase('documents', '1.0', 'Offline document storage', 5 * 1024 * 1024, function (db) {
@@ -23,10 +22,9 @@
 
 
 /* Controllers */
-var phonecatControllers = angular.module('phonecatControllers', [], function ($httpProvider) {
+var kulinarControllers = angular.module('kulinarControllers', [], function ($httpProvider) {
     // Используем x-www-form-urlencoded Content-Type
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-
     // Переопределяем дефолтный transformRequest в $http-сервисе
     $httpProvider.defaults.transformRequest = [function (data) {
             /**
@@ -37,10 +35,8 @@ var phonecatControllers = angular.module('phonecatControllers', [], function ($h
             var param = function (obj) {
                 var query = '';
                 var name, value, fullSubName, subValue, innerObj, i;
-
                 for (name in obj) {
                     value = obj[name];
-
                     if (value instanceof Array) {
                         for (i = 0; i < value.length; ++i) {
                             subValue = value[i];
@@ -64,66 +60,21 @@ var phonecatControllers = angular.module('phonecatControllers', [], function ($h
 
                 return query.length ? query.substr(0, query.length - 1) : query;
             };
-
             return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
         }];
 });
-
-
-
-phonecatControllers.controller('TestCtrl', ['$scope', '$http',
+kulinarControllers.controller('TestCtrl', ['$scope', '$http',
     function ($scope, $http) {
 
         $scope.menu = 'test';
-
-
     }]);
-
-
-
-
-phonecatControllers.controller('HomeCtrl', ['$scope', '$http',
-    function ($scope, $http) {
-
-     
-
-        $scope.LoadNext = function () {
-            if ($scope.content) {
-                $scope.shag++;
-                $http.get('php/index.php?shag=' + $scope.shag).
-                        success(function (data, status, headers, config) {
-                            if (data != null) {
-                                for (var i = 0; i < data.length; i++) {
-                                    $scope.recipes.push(data[i]);
-                                }
-                            } else {
-                                $scope.content = 0;
-                            }
-                        }).
-                        error(function (data, status, headers, config) {
-
-                        });
-            }
-            return false;
-        }
-        //  $scope.menu = Menu.query();
-//    $scope.orderProp = 'age';
-        $http.get('php/index.php?shag=0').
-                success(function (data, status, headers, config) {
-                    $scope.recipes = data;
-                    $scope.shag = 0;
-                    $scope.content = 1;
-                }).
-                error(function (data, status, headers, config) {
-
-                });
-
-
-
+kulinarControllers.controller('HomeCtrl', ['$scope', '$http', 'Recipes',
+    function ($scope, $http, Recipes) {
+        $scope.Recipes = new Recipes();
+        $scope.Recipes.nextPage();
     }]);
-
 //Добавление рецепта --------------------------------------------------------------------
-phonecatControllers.controller('RecipesCtrl', ['$scope', '$http', 'Recipes',
+kulinarControllers.controller('RecipesCtrl', ['$scope', '$http', 'Recipes',
     function ($scope, $http, Recipes, $timeout) {
         $scope.newrecept = {
             'name': '',
@@ -144,12 +95,6 @@ phonecatControllers.controller('RecipesCtrl', ['$scope', '$http', 'Recipes',
                 error(function (data, status, headers, config) {
 
                 });
-
-
-
-
-
-
         $scope.ingredients = [{'id': 0, 'name': ''}];
         $scope.units = [{'id': 0, 'name': '', 'shortcut': ''}];
         $http.get('php/index.php?action=ingredients').
@@ -160,21 +105,14 @@ phonecatControllers.controller('RecipesCtrl', ['$scope', '$http', 'Recipes',
                 }).
                 error(function (data, status, headers, config) {
                 });
-
-
-
-
         $scope.multipleUnits = {};
         $scope.multipleUnits.items = '';
-
-
         $scope.tagTransform = function (newTag) {
             var item = {
                 name: newTag,
             };
             return item;
         };
-
         $scope.verification = function () {
             alert('Проверка');
             console.log($scope.newrecept);
@@ -185,14 +123,13 @@ phonecatControllers.controller('RecipesCtrl', ['$scope', '$http', 'Recipes',
                     error(function (data, status, headers, config) {
 
                     });
-
         }
 
 
 
 
     }]);
-phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Phone',
+kulinarControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Phone',
     function ($scope, $routeParams, Phone) {
         $scope.phone = Phone.get({phoneId: $routeParams.phoneId}, function (phone) {
             $scope.mainImageUrl = phone.images[0];
@@ -201,9 +138,8 @@ phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Ph
             $scope.mainImageUrl = imageUrl;
         }
     }]);
-
 //RecipesDetailCtrl
-phonecatControllers.controller('RecipesDetailCtrl', ['$scope', '$http', '$routeParams',
+kulinarControllers.controller('RecipesDetailCtrl', ['$scope', '$http', '$routeParams',
     function ($scope, $http, $routeParams) {
         $http.get('php/index.php?action=ingredients&recId=' + $routeParams.recId).
                 success(function (data, status, headers, config) {

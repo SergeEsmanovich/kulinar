@@ -2,13 +2,13 @@
 
 /* Filters */
 
-angular.module('phonecatFilters', []).filter('checkmark', function() {
+angular.module('kulinarFilters', []).filter('checkmark', function() {
   return function(input) {
     return input ? '\u2713' : '\u2718';
   };
 });
 
-phonecatControllers.filter('propsFilter', function () {
+kulinarControllers.filter('propsFilter', function () {
     return function (items, props) {
         var out = [];
 

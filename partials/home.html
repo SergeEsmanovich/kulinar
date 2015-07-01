@@ -1,5 +1,5 @@
 <div class="container-fluid">
- 
+
     <div class="row">
         <div class="well well-sm"> Поиск и Фильтры, сначала запускаем поиск по странице, а потом поиск по БД</div>
     </div>
@@ -7,23 +7,25 @@
         <div class="well well-sm"> рейтинги</div>
     </div>
     <div class="row">
-        <div class="col-md-2" ng-repeat="rec in recipes">
-            <a href="#/home/{{rec.alias}}">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        {{rec.name}}                   
+        <div infinite-scroll='Recipes.nextPage()' infinite-scroll-disabled='Recipes.busy' infinite-scroll-distance='0'>
+            <div class="col-md-2" ng-repeat="rec in Recipes.items">
+                <a href="#/home/{{rec.alias}}">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            {{rec.name}}                   
+                        </div>
+                        <div class="panel-body">
+                            <img class="col-md-12" src="{{rec.image}}" alt="">
+                        </div>
+                        <div class="panel-footer">Panel footer</div>
                     </div>
-                    <div class="panel-body">
-                        <img class="col-md-12" src="{{rec.image}}" alt="">
-                    </div>
-                    <div class="panel-footer">Panel footer</div>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
     </div>
 
 </div>
 
-<div in-view="LoadNext()">
-</div>
+<!--<div in-view="LoadNext()">
+</div>-->
 <div class="well well-sm"></div>

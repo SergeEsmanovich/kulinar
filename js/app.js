@@ -2,20 +2,21 @@
 
 /* App Module */
 
-var phonecatApp = angular.module('phonecatApp', [
+var kulinarApp = angular.module('kulinarApp', [
     'ngRoute',
     'phonecatAnimations',
-    'phonecatControllers',
-    'phonecatFilters',
-    'phonecatServices',
+    'kulinarControllers',
+    'kulinarFilters',
+    'kulinarServices',
     'ngSanitize',
     'ui.select',
-    'duScroll',
+    //'duScroll',
+    'infinite-scroll',
     'angular-inview',
     'textAngular'
 ]);
 
-phonecatApp.config(['$routeProvider',
+kulinarApp.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider.
                 when('/home', {

@@ -2,7 +2,7 @@
 
 /* Directives */
 var INTEGER_REGEXP = /^\-?\d+$/;
-phonecatControllers.directive('integer', function () {
+kulinarControllers.directive('integer', function () {
     return {
         require: 'ngModel',
         link: function ($scope, $elm, $attrs, $ctrl) {
@@ -35,7 +35,7 @@ phonecatControllers.directive('integer', function () {
 });
 
 
-phonecatControllers.directive('menu', function () {
+kulinarControllers.directive('menu', function () {
     return {
         restrict: 'E',
         transclude: true,
@@ -95,7 +95,7 @@ phonecatControllers.directive('menu', function () {
 });
 
 
-phonecatControllers.directive('activeLink', ['$location', function (location) {
+kulinarControllers.directive('activeLink', ['$location', function (location) {
         return {
             restrict: 'A',
             link: function (scope, element, attrs, controller) {
