@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="phonecatApp">
+    <head>
+        <title>Титле</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="images/icon.png" />
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="css/animations.css">
+        <link rel="stylesheet" href="css/style.css">
+
+
+
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+
+
+        <!-- ui-select files -->
+        <script src="components/select2/select.min.js"></script>
+        <link rel="stylesheet" href="components/select2/select.min.css ">
+
+        <!--scroll-->
+        <script src="bower_components/angular-scroll/angular-scroll.min.js"></script>
+
+        <!--inview-->
+        <script src="bower_components/angular-inview/angular-inview.js"></script>
+
+        <!--textAngular-->
+        <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css'>
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.2.2/textAngular-sanitize.min.js'></script>
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.2.2/textAngular.min.js'></script>
+
+
+
+
+
+        <script src="js/app.js"></script>
+        <script src="js/animations.js"></script>
+        <script src="js/controllers.js"></script>
+        <script src="js/filters.js"></script>
+        <script src="js/services.js"></script>
+        <script src="js/directives.js"></script>
+
+
+
+
+    </head>
+    <body>
+        <menu></menu>
+        <div id="doc-count">
+
+        </div>
+        <div class="view-container">
+            <div ng-view class="view-frame"></div>
+        </div>
+    </body>
+</html>

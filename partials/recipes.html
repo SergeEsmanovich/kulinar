@@ -1,0 +1,106 @@
+<style>
+    .animate-if {
+    }
+
+    .animate-if.ng-enter, .animate-if.ng-leave {
+        -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+        transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+    }
+
+    .animate-if.ng-enter,
+    .animate-if.ng-leave.ng-leave-active {
+        opacity:0;
+    }
+
+    .animate-if.ng-leave,
+    .animate-if.ng-enter.ng-enter-active {
+        opacity:1;
+    }
+</style>
+<div ng-show="login" class="container-fluid">
+    <div class="container">
+        <div ng-hide="checked" class="panel panel-default">
+            <div class="panel-heading">Добавление рецепта Шаг №1</div>
+            <div class="panel-body">
+                <form name="form" novalidate>
+                    <div class="form-group">
+                        <label for="recipesname">Название рецепта</label>
+                        <input ng-model="newrecept.name" type="text" class="form-control" id="recipesname" placeholder="Введите название рецепта">
+                    </div>
+                    <h4>Выберите инредиенты из списка или добавьте новые</h4>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <ui-select  multiple tagging="tagTransform" tagging-label="(custom 'new' label)" ng-model="newrecept.multipleIngredients.items" theme="bootstrap"   title="Choose a color">
+                                <ui-select-match placeholder="Выберите ингредиент...">{{$item.name}}</ui-select-match>
+                                <ui-select-choices repeat="item in ingredients | filter:$select.search">
+                                    {{item.name}}
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-4">
+
+                            <div  ng-repeat="item in newrecept.multipleIngredients.items">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1">{{item.name}}</span>
+                                    <input integer="{{$index}}" type="text" ng-model="item.count" class="form-control" placeholder="количество" aria-describedby="basic-addon1">
+                                </div>  
+                                <div class="alert alert-danger" ng-show="item.invalid">Значение должно быть числом!</div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div  ng-repeat="item in newrecept.multipleIngredients.items">
+
+                                <ui-select  ng-model="item.unit.selected" theme="bootstrap">
+                                    <ui-select-match placeholder="Выберите единицу измерения из списка.... ">{{$select.selected.name}}</ui-select-match>
+                                    <ui-select-choices repeat="unit in units | filter: $select.search">
+                                        <div ng-bind-html="unit.name | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+
+                        </div>
+                    </div>
+                    <hr>
+                    <nav>
+                        <ul class="pager">
+                            <li class="next"><a ng-click="checked = true" href="">Перейти к следующему шагу <span aria-hidden="true">&rarr;</span></a></li>
+                        </ul>
+                    </nav>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                            <span class="sr-only">50% Complete (success)</span>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <!-------------------------------------------------------------------Шаг номер 2------------------------------------------------------------------>
+        <div ng-show="checked" class="animate-if panel panel-default">
+            <div   class="panel-heading">Добавление рецепта Шаг №2</div>
+            <div class="panel-body">
+                <form>
+                    <div text-angular="text-angular" name="htmlcontent" ng-model="newrecept.htmlcontent" ta-disabled='disabled'></div>
+                    <hr>
+                    <textarea class="form-control" ng-model="newrecept.htmlcontent" style="width: 100%"></textarea>
+                    <nav>
+                        <ul class="pager">
+                            <li class="previous"><a ng-click="checked = false" href=""><span aria-hidden="true">&larr;</span> Вернуться к предыдущему шагу</a></li>
+                            <li class="next"><a ng-click="verification()" href="">Отправить рецепт на проверку <span aria-hidden="true">&rarr;</span></a></li>
+                        </ul>
+                    </nav>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            <span class="sr-only">100% Complete (success)</span>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

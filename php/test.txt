@@ -1,0 +1,1 @@
+{"name":"ввнрекап","multipleIngredients":{"items":[{"id":"1","name":"Лист капустный","$$hashKey":"object:81"},{"name":"рпкроеа","isTag":true,"$$hashKey":"object:148"}]},"user":{"user_id":"5","ip":"127.0.0.1","token":"242783f0c6140cc2468a80b76b92d897","first_name":"Korol-ariya","network":"vkontakte","uid":"68889220"}}

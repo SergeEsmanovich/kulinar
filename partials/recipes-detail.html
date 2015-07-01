@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="container">
+        <div class="pull-right"><a class="btn btn-default" href="#/home">Х</a></div>
+    </div>
+</div>
+<div class="row">
+    <div class="container">
+        <div class="col-md-12">
+            <h1 class="text-center">{{rec.name}}</h1>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <img class="col-md-12" src="http://placehold.it/600x300" alt=""> 
+            </div>
+            <div class="col-md-6">
+                <h4 class="text-center">Состав</h4>
+                <ul class="">
+                    <li ng-repeat="item in rec.structure">
+                        {{item.name + ' ' + item.count + ' ' + item.shortcut}}
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+        <div class="col-md-12 ">
+            <h4 class="text-center">Способ приготовления</h4>
+            {{rec.process}}
+        </div>
+        <div class="col-md-12">
+            <h4 class="text-center">Примечания</h4>
+        </div>
+    </div>
+</div>
+
+
