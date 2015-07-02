@@ -63,7 +63,7 @@ class Recipes extends Db {
         $shag *= 20;
         $this->sql = "SELECT *  FROM recipes "
                 . "ORDER BY id DESC LIMIT $shag,20";
-          
+
 
         $this->query();
         $this->recipes = $this->LoadObjectList();
@@ -113,14 +113,40 @@ class Recipes extends Db {
 
     function add($post) {
         //Тут еще нужна проверка прав пользователя
-
-        file_put_contents('test.txt', $_POST);
+        //file_put_contents('test.txt', $_POST);
         $recept = json_decode($post['recept']);
 
         $insert_arr = array('name' => $recept->name, 'process' => $recept->htmlcontent, 'image' => 'images/Golubci.JPG', 'alias' => $this->str2url($recept->name));
         $result = $this->mysql_insert('recipes', $insert_arr);
 
         $rec_id = $this->last_id;
+
+
+
+        $ingredients = json_decode($this->getAllIngredients());
+        $ingredients = $ingredients->ingredients;
+
+
+
+
+        foreach ($recept->multipleIngredients->items as $k => $v) {
+            $bul = true; //Предпологаем что нужно записать в таблицу
+            foreach ($ingredients as $key => $value) {
+                if ($value->name == $v->name) {
+                    $bul = false; //Ищем совпадения если нашли выключаем запись и выходим из цикла
+                    break;
+                }
+            }
+
+            if ($bul) {
+                $insert_arr = array('name' => $v->name);
+                $result = $this->mysql_insert('ingredients', $insert_arr);
+                // $ingredient_id = $this->last_id;
+                $v->id = $this->last_id;
+            }
+        }
+    //    file_put_contents('test.txt', json_encode($recept->multipleIngredients->items));
+
 
         foreach ($recept->multipleIngredients->items as $key => $value) {
             $insert_arr = array('recipes_id' => $rec_id, 'ingredients_id' => $value->id, 'units_id' => $value->unit->selected->id, 'count' => $value->count);

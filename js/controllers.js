@@ -74,8 +74,17 @@ kulinarControllers.controller('HomeCtrl', ['$scope', '$http', 'Recipes',
         $scope.Recipes.nextPage();
     }]);
 //Добавление рецепта --------------------------------------------------------------------
-kulinarControllers.controller('RecipesCtrl', ['$scope', '$http', 'Recipes',
-    function ($scope, $http, Recipes, $timeout) {
+kulinarControllers.controller('RecipesCtrl', ['$scope', '$http', 
+    function ($scope, $http, $timeout) {
+
+
+      
+
+
+
+
+
+
         $scope.newrecept = {
             'name': '',
             'multipleIngredients': {'items': []}
@@ -114,9 +123,10 @@ kulinarControllers.controller('RecipesCtrl', ['$scope', '$http', 'Recipes',
             return item;
         };
         $scope.verification = function () {
-            alert('Проверка');
-            console.log($scope.newrecept);
-            $http.post('/php/index.php?action=add_recipes', {recept: JSON.stringify($scope.newrecept)}).
+            var recept = $scope.newrecept;
+            // alert('Проверка');
+            console.log(recept);
+            $http.post('/php/index.php?action=add_recipes', {recept: JSON.stringify(recept)}).
                     success(function (data, status, headers, config) {
 
                     }).

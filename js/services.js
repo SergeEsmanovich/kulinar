@@ -20,7 +20,7 @@ kulinarServices.factory('Recipes', ['$http',
             this.items = [];
             this.busy = false;
             this.after = '';
-            this.page = 1;
+            this.page = 0;
         };
         service.prototype.nextPage = function () {
             if (this.busy)
