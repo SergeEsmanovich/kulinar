@@ -19,7 +19,7 @@ switch ($action) {
         }
         break;
     case 'add_recipes':
-        $recipes->add($_POST);
+        echo json_encode($recipes->add($_POST));
         break;
     default :
         $shag = $_GET['shag'];
