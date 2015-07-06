@@ -19,18 +19,48 @@
 </style>
 <div ng-show="login" class="container-fluid">
     <div class="container">
-        <div ng-show="newrecept.answer" ng-class="newrecept.answer.status?'alert-success':'alert-danger'" class="alert alert-success alert-dismissible" role="alert">
+        <div ng-show="newrecept.answer" ng-class="newrecept.answer.status?'alert-success':'alert - danger'" class="alert alert-success alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <strong>Внимание!</strong> {{newrecept.answer.msg}}
         </div>
         <div ng-hide="checked" class="panel panel-default">
             <div class="panel-heading">Добавление рецепта Шаг №1</div>
+
+
+
             <div class="panel-body">
                 <form name="form" novalidate>
                     <div class="form-group">
                         <label for="recipesname">Название рецепта</label>
                         <input ng-model="newrecept.name" type="text" class="form-control" id="recipesname" placeholder="Введите название рецепта">
                     </div>
+                    <div class="row">
+                        <div class="file_upload">
+                            <div class="dr_area col-md-8">
+                                <div ngf-drop ngf-select ng-model="files" class="drop-box" 
+                                     ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true"
+                                     accept="image/*">Перетащите сюда фотографии блюда, или нажмите на область</div>
+                                <div ngf-no-file-drop>Ваш браузер не поддерживает перетаскивание файлов</div>
+                            </div>
+                            <div class="col-md-4">
+                                <!--<div ng-hide="files" class="btn btn-default" ngf-select ng-model="files" ngf-multiple="1">Выберите файлы</div>-->
+                                <div ng-show="files" ng-click="upload(files)" class="btn btn-default">Загрузить изображения</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">   
+                        <div class="col-md-12">
+                            <ul class="list-inline preview">
+                                <li class="col-md-2" ng-repeat="image in files track by $index">
+                                    <img class="img-thumbnail" ngf-src="image" /> 
+                                <progressbar max="100" value="progress[$index].procent"><span>{{progress[$index].procent}} / {{100}}</span></progressbar>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="clear"></div>
+
                     <h4>Выберите инредиенты из списка или добавьте новые</h4>
                     <div class="row">
                         <div class="col-md-4">
