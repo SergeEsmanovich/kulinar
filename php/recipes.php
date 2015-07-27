@@ -1,7 +1,5 @@
 <?php
 
-include_once 'db.php';
-
 class Recipes extends Db {
 
     public $recipes;
@@ -71,6 +69,7 @@ class Recipes extends Db {
                 . " WHERE s.recipes_id = $rec_id";
         $this->query();
         $this->structure = $this->LoadObjectList();
+        if($this->structure)
         foreach ($this->structure as $key => $value) {
             if ($value->count == 0) {
                 $value->count = '';
@@ -88,8 +87,13 @@ class Recipes extends Db {
 
         $this->query();
         $this->recipes = $this->LoadObjectList();
-        foreach ($this->recipes as $key => $value) {
-            $value->ingredients = $this->getIngredientsById($value->id);
+        if ($this->recipes) {
+            foreach ($this->recipes as $key => $value) {
+                $value->ingredients = $this->getIngredientsById($value->id);
+            }
+        } else {
+            $answer = array('msg' => 'end');
+            return json_encode($answer);
         }
 
 
@@ -190,4 +194,3 @@ class Recipes extends Db {
 
 }
 ?>
-

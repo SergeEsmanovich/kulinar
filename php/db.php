@@ -6,6 +6,7 @@ class Db {
     public $sql;
     public $query;
     public $last_id;
+    public $log;
 
     public function __construct() {
         $this->link = mysql_connect('localhost', 'root', '') or die('Could not connect to server.');
@@ -13,7 +14,7 @@ class Db {
     }
 
     public function __destruct() {
-        mysql_close($this->link);
+        //   mysql_close($this->link);
     }
 
     public function query() {
@@ -44,7 +45,12 @@ class Db {
         $values = array_map('mysql_real_escape_string', array_values($inserts));
         $keys = array_keys($inserts);
 
-        $query = mysql_query('INSERT INTO `' . $table . '` (`' . implode('`,`', $keys) . '`) VALUES (\'' . implode('\',\'', $values) . '\')');
+        $this->query = 'INSERT INTO `' . $table . '` (`' . implode('`,`', $keys) . '`) VALUES (\'' . implode('\',\'', $values) . '\')';
+        $query = mysql_query($this->query);
+        if (!$query) {
+            $this->log = mysql_error();
+        }
+
         $this->last_id = mysql_insert_id();
         return $query;
     }

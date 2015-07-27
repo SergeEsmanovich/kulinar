@@ -10,22 +10,22 @@
                     <ul class="nav navbar-nav">
                         <li ng-repeat="item in menu track by $index" ng-show="getShow($index)"  ng-class="getClass(item.link)"><a ng-click="take($index)" href="#{{item.link}}">{{item.text}}</a></li>
 
-                        <li ng-show="login" ><a href="" ng-click="logout()">Выйти</a></li>
+                        <li ng-show="auth.user_login" ><a href="" ng-click="auth.logout()">Выйти</a></li>
                     </ul>
                 </div>
                 <script src="//ulogin.ru/js/ulogin.js"></script>
-                <ul ng-hide="login" class="nav navbar-nav navbar-right">
+                <ul ng-hide="auth.user_login" class="nav navbar-nav navbar-right">
                     <li><a href="">Вход<span class="glyphicon glyphicon-arrow-right"></span></a></li>
                     <li>
 
                         <a class="navbar-brand" href="">
-                            <div   id="uLogin" data-ulogin="display=panel;fields=first_name,last_name;providers=vkontakte,odnoklassniki,google,yandex,facebook,mailru;hidden=other;redirect_uri=http%3A%2F%2Fkulinar%2Fphp%2Fauth.php"></div>
+                            <div   id="uLogin" data-ulogin="display=panel;fields=first_name,last_name;providers=vkontakte,odnoklassniki,google,yandex,facebook,mailru;hidden=other;redirect_uri=http%3A%2F%2Fkulinar%2Fphp%2Findex.php%3Faction%3Dauth"></div>
                         </a>
                     </li>
                 </ul>
 
-                <ul ng-show="login" class="nav navbar-nav navbar-right">
-                    <li><a href=""><span>Добро пожаловать </span>{{user.first_name}}</a></li>
+                <ul ng-show="auth.user_login" class="nav navbar-nav navbar-right">
+                    <li><a href=""><span>Добро пожаловать </span>{{auth.user.first_name}}</a></li>
                 </ul>
             </div><!-- /.container-fluid -->
         </nav>

@@ -40,7 +40,11 @@ kulinarControllers.directive('menu', function () {
         restrict: 'E',
         transclude: true,
         scope: {},
-        controller: function ($scope, $http, $location) {
+        controller: function ($scope, $http, $location, $rootScope, Auth) {
+            $rootScope.auth = new Auth();
+            $rootScope.auth.login();
+            $scope.auth = $rootScope.auth;
+//            $scope.auth.login();
 
             $scope.menu = [{class: 'active', text: 'Главная', link: '/home', show: 0}, {class: '', text: 'Добавить рецепт', link: '/recipes', show: 1}];
             $scope.getClass = function (path) {
@@ -52,7 +56,7 @@ kulinarControllers.directive('menu', function () {
             }
             $scope.getShow = function (index) {
                 if ($scope.menu[index].show) {
-                    if ($scope.login) {
+                    if ($scope.auth.user_login) {
                         return 1;
                     } else {
                         return 0;
@@ -65,30 +69,7 @@ kulinarControllers.directive('menu', function () {
 
 
 
-            $http.get('php/auth.php?action=user').
-                    success(function (data, status, headers, config) {
-                        $scope.user = data;
-                        if ($scope.user.user_id > 0) {
-                            $scope.login = 1;
-                        } else {
-                            $scope.login = 0;
-                        }
-                        console.log(data);
-                    }).
-                    error(function (data, status, headers, config) {
 
-                    });
-
-            $scope.logout = function () {
-                $http.get('php/auth.php?action=logout').
-                        success(function (data, status, headers, config) {
-                            $scope.user = null;
-                            $scope.login = 0;
-                        }).
-                        error(function (data, status, headers, config) {
-
-                        });
-            }
         },
         templateUrl: 'menu/menu.html'
     };

@@ -1,12 +1,7 @@
 <?php
 
-include_once 'db.php';
+class auth extends Db {
 
-class session extends Db {
-
-//    public function __construct() {
-//        session_start();
-//    }
     public $login_user;
 
     private function find_user($user) {
@@ -20,8 +15,8 @@ class session extends Db {
             session_start();
             $token = $_POST['token'];
             $s = file_get_contents('http://ulogin.ru/token.php?token=' . $_POST['token'] . '&host=' . $_SERVER['HTTP_HOST']);
-			file_put_contents('auth.txt',$s);
-		  $user = json_decode($s);
+            file_put_contents('auth.txt', $s);
+            $user = json_decode($s);
             if (($_SESSION['network'] != $user->network) && ($_SESSION['uid'] != $user->uid)) {
 
                 if (!empty($user)) {
@@ -30,10 +25,13 @@ class session extends Db {
                         $insert_arr = array('uid' => $user->uid, 'network' => $user->network, 'username' => $user->first_name);
                         $result = $this->mysql_insert('users', $insert_arr);
 
-                        $insert_arr = array('user_id' => $this->last_id, 'token' => $token, 'ip' => $_SERVER['REMOTE_ADDR']);
+                        $user_id = $this->last_id;
+
+
+                        $insert_arr = array('user_id' => $user_id, 'token' => $token, 'ip' => $_SERVER['REMOTE_ADDR']);
                         $result = $this->mysql_insert('user_tokens', $insert_arr);
 
-                        $_SESSION['user_id'] = $this->last_id;
+                        $_SESSION['user_id'] = $user_id;
                         $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
                         $_SESSION['token'] = $_POST['token'];
                         $_SESSION['first_name'] = $user->first_name;
@@ -65,6 +63,11 @@ class session extends Db {
         echo json_encode($_SESSION);
     }
 
+    public function get_user_in() {
+        session_start();
+        return json_encode($_SESSION);
+    }
+
     public function logount() {
         session_start();
         session_destroy();
@@ -72,23 +75,4 @@ class session extends Db {
 
 }
 
-$session = new session();
-
-
-if (isset($_GET['action'])) {
-    $action = $_GET['action'];
-    switch ($action) {
-        case 'user':
-            $session->get_user();
-            break;
-        case 'logout':
-            $session->logount();
-            break;
-        default:
-            $session->login();
-            break;
-    }
-} else {
-    $session->login();
-}
 ?>

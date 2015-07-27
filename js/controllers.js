@@ -63,74 +63,101 @@ var kulinarControllers = angular.module('kulinarControllers', [], function ($htt
             return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
         }];
 });
-kulinarControllers.controller('TestCtrl', ['$scope', '$http',
-    function ($scope, $http) {
 
-        $scope.menu = 'test';
-    }]);
-kulinarControllers.controller('HomeCtrl', ['$scope', '$http', 'Recipes',
-    function ($scope, $http, Recipes) {
+kulinarControllers.controller('HomeCtrl', ['$scope', '$http', 'Recipes', 'Auth', '$rootScope',
+    function ($scope, $http, Recipes, Auth, $rootScope) {
         $scope.Recipes = new Recipes();
         $scope.Recipes.nextPage();
     }]);
 //Добавление рецепта --------------------------------------------------------------------
-kulinarControllers.controller('RecipesCtrl', ['$scope', '$http', '$timeout', 'Upload',
-    function ($scope, $http, $timeout, Upload) {
+kulinarControllers.controller('RecipesCtrl', ['$scope', '$http', '$timeout', 'Upload', 'Auth', '$rootScope', '$animate',
+    function ($scope, $http, $timeout, Upload, Auth, $rootScope, $animate) {
+        $scope.photos = [];
+        $scope.auth = $rootScope.auth;
 ///////////////////////////////////////////////
         $scope.progress = [];
-
         $scope.$watch('files', function (files) {
             $scope.progress = [];
             angular.forEach(files, function (value, key) {
                 $scope.progress.push({name: value.name, procent: 0});
             });
         });
+
+        $scope.remove_preview = function (el) {
+            $scope.files.splice(el, 1);
+        }
+
         $scope.upload = function (files) {
             if (files && files.length) {
                 for (var i = 0; i < files.length; i++) {
                     var file = files[i];
                     Upload.upload({
-                        url: '/php/upload.php',
+                        url: '/php/index.php',
                         fields: {
-                            'username': $scope.username
+                            'user': $scope.auth,
+                            action: 'upload'
                         },
                         file: file
                     }).progress(function (evt) {
                         var procent = parseInt(100.0 * evt.loaded / evt.total);
                         angular.forEach($scope.progress, function (value, key) {
-                            if (evt.config.file.name == value.name)
+                            if (evt.config.file.name == value.name) {
                                 value.procent = procent;
+                            }
+
+
                         });
                     }).success(function (data, status, headers, config) {
                         console.log(data);
+
+                        $timeout(function () {
+                            $scope.newrecept.photos.push(data.photo);
+                            $scope.newrecept.answer = data;
+                            $timeout(function () {
+                                $scope.newrecept.answer = null;
+                            }, 5000);
+                        }, 2000);
+
                         //$scope.files = [];
                     });
                 }
             }
         };
 
+        $scope.$watch('progress', function (newv, oldv) {
+            var bul = true;
+            angular.forEach($scope.progress, function (value, key) {
+                if (value.procent != 100) {
+                    bul = false;
+                    return false;
+                }
+            });
+            if (bul) {
+                $timeout(function () {
+                    $scope.files = [];
+                }, 2000);
+            }
+
+        }, true);
+
+
+
+
         ////////////////////////////////////
 
 
         $scope.newrecept = {
-            'name': '',
-            'multipleIngredients': {'items': []}
+            user: $scope.auth,
+            name: '',
+            photos: [],
+            main_photo: 0,
+            multipleIngredients: {'items': []}
+        }
+        $scope.get_active = function (index) {
+            return  index == $scope.newrecept.main_photo ? 'active' : '';
         }
 
-        $http.get('php/auth.php?action=user').
-                success(function (data, status, headers, config) {
-                    $scope.user = data;
-                    $scope.newrecept.user = data;
-                    if ($scope.user.user_id > 0) {
-                        $scope.login = 1;
-                    } else {
-                        $scope.login = 0;
-                    }
-                    console.log(data);
-                }).
-                error(function (data, status, headers, config) {
 
-                });
         $scope.ingredients = [{'id': 0, 'name': ''}];
         $scope.units = [{'id': 0, 'name': '', 'shortcut': ''}];
         $http.get('php/index.php?action=ingredients').

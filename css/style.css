@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .ng-isolate-scope {
   padding: 0px; }
 
@@ -61,5 +62,61 @@
 
 .preview img {
   width: 100%; }
+.preview .remove_preview {
+  background: #fff;
+  padding: 5px;
+  cursor: pointer;
+  position: absolute;
+  right: 0px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  font-size: 13px;
+  padding: 2px;
+  border: 2px solid #000; }
+
+.downloaded img {
+  width: 100%; }
+.downloaded li {
+  cursor: pointer; }
+  .downloaded li.active img {
+    background: red; }
+
+/*╨Р╨╜╨╕╨╝╨░╤Ж╨╕╨╕*/
+.animate-show {
+  opacity: 1; }
+
+.animate-show.ng-hide-add.ng-hide-add-active,
+.animate-show.ng-hide-remove.ng-hide-remove-active {
+  -webkit-transition: all linear 0.5s;
+  transition: all linear 0.5s; }
+
+.animate-show.ng-hide {
+  line-height: 0;
+  opacity: 0;
+  padding: 0 10px; }
+
+.repeat-enter-setup, .repeat-leave-setup, .repeat-move-setup {
+  -webkit-transition: all linear 1s;
+  -moz-transition: all linear 1s;
+  -ms-transition: all linear 1s;
+  -o-transition: all linear 1s;
+  transition: all linear 1s; }
+
+.repeat-enter-setup {
+  max-height: 0;
+  opacity: 0; }
+
+.repeat-enter-setup.repeat-enter-start {
+  max-height: 250px;
+  opacity: 1; }
+
+.repeat-leave-setup {
+  opacity: 1;
+  max-height: 250px; }
+
+.repeat-leave-setup.repeat-leave-start {
+  opacity: 0;
+  max-height: 0; }
 
 /*# sourceMappingURL=style.css.map */

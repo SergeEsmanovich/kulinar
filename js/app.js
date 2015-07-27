@@ -16,7 +16,8 @@ var kulinarApp = angular.module('kulinarApp', [
     'angular-inview',
     'textAngular',
     'ngFileUpload',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ngAnimate'
 ]);
 
 kulinarApp.config(['$routeProvider',
@@ -24,7 +25,7 @@ kulinarApp.config(['$routeProvider',
         $routeProvider.
                 when('/home', {
                     templateUrl: 'partials/home.html',
-                    controller: 'HomeCtrl'
+                    controller: 'HomeCtrl'                 
                 }).
                 when('/recipes/', {
                     templateUrl: 'partials/recipes.html',
@@ -38,3 +39,4 @@ kulinarApp.config(['$routeProvider',
                     redirectTo: '/home'
                 });
     }]);
+
