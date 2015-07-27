@@ -74,15 +74,42 @@ kulinarControllers.controller('HomeCtrl', ['$scope', '$http', 'Recipes',
         $scope.Recipes.nextPage();
     }]);
 //Добавление рецепта --------------------------------------------------------------------
-kulinarControllers.controller('RecipesCtrl', ['$scope', '$http', 
-    function ($scope, $http, $timeout) {
+kulinarControllers.controller('RecipesCtrl', ['$scope', '$http', '$timeout', 'Upload',
+    function ($scope, $http, $timeout, Upload) {
+///////////////////////////////////////////////
+        $scope.progress = [];
 
+        $scope.$watch('files', function (files) {
+            $scope.progress = [];
+            angular.forEach(files, function (value, key) {
+                $scope.progress.push({name: value.name, procent: 0});
+            });
+        });
+        $scope.upload = function (files) {
+            if (files && files.length) {
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    Upload.upload({
+                        url: '/php/upload.php',
+                        fields: {
+                            'username': $scope.username
+                        },
+                        file: file
+                    }).progress(function (evt) {
+                        var procent = parseInt(100.0 * evt.loaded / evt.total);
+                        angular.forEach($scope.progress, function (value, key) {
+                            if (evt.config.file.name == value.name)
+                                value.procent = procent;
+                        });
+                    }).success(function (data, status, headers, config) {
+                        console.log(data);
+                        //$scope.files = [];
+                    });
+                }
+            }
+        };
 
-      
-
-
-
-
+        ////////////////////////////////////
 
 
         $scope.newrecept = {
@@ -125,10 +152,14 @@ kulinarControllers.controller('RecipesCtrl', ['$scope', '$http',
         $scope.verification = function () {
             var recept = $scope.newrecept;
             // alert('Проверка');
-            console.log(recept);
+//            console.log(recept);
             $http.post('/php/index.php?action=add_recipes', {recept: JSON.stringify(recept)}).
                     success(function (data, status, headers, config) {
-
+                        $scope.newrecept.answer = data;
+                        $scope.checked = 0;
+                        $timeout(function () {
+                            $scope.newrecept.answer = null;
+                        }, 2000);
                     }).
                     error(function (data, status, headers, config) {
 

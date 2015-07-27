@@ -59,6 +59,27 @@ class Recipes extends Db {
         return json_encode($rec);
     }
 
+    function getIngredientsById($rec_id) {
+        $fild = ' i.name,
+  u.name mer,
+  u.shortcut,
+  s.count';
+
+        $this->sql = "SELECT $fild  FROM structure s "
+                . " LEFT JOIN ingredients i ON i.id = s.ingredients_id "
+                . " LEFT JOIN units u  ON u.id = s.units_id"
+                . " WHERE s.recipes_id = $rec_id";
+        $this->query();
+        $this->structure = $this->LoadObjectList();
+        foreach ($this->structure as $key => $value) {
+            if ($value->count == 0) {
+                $value->count = '';
+            }
+        }
+
+        return $this->structure;
+    }
+
     function getRecipes($shag) {
         $shag *= 20;
         $this->sql = "SELECT *  FROM recipes "
@@ -67,6 +88,11 @@ class Recipes extends Db {
 
         $this->query();
         $this->recipes = $this->LoadObjectList();
+        foreach ($this->recipes as $key => $value) {
+            $value->ingredients = $this->getIngredientsById($value->id);
+        }
+
+
         return json_encode($this->recipes);
     }
 
@@ -119,6 +145,10 @@ class Recipes extends Db {
         $insert_arr = array('name' => $recept->name, 'process' => $recept->htmlcontent, 'image' => 'images/Golubci.JPG', 'alias' => $this->str2url($recept->name));
         $result = $this->mysql_insert('recipes', $insert_arr);
 
+        if (!$result) {
+            return array('msg' => 'Произошла ошибка, рецепт не записался в базу', status => 0);
+        }
+
         $rec_id = $this->last_id;
 
 
@@ -145,13 +175,17 @@ class Recipes extends Db {
                 $v->id = $this->last_id;
             }
         }
-    //    file_put_contents('test.txt', json_encode($recept->multipleIngredients->items));
+        //    file_put_contents('test.txt', json_encode($recept->multipleIngredients->items));
 
 
         foreach ($recept->multipleIngredients->items as $key => $value) {
             $insert_arr = array('recipes_id' => $rec_id, 'ingredients_id' => $value->id, 'units_id' => $value->unit->selected->id, 'count' => $value->count);
             $result = $this->mysql_insert('structure', $insert_arr);
+            if (!$result) {
+                return array('msg' => 'Произошла ошибка, ингредиент не записался в базу', status => 0);
+            }
         }
+        return array('msg' => 'Рецепт успешно добавлен', status => 1);
     }
 
 }

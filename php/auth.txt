@@ -1,1 +1,1 @@
-{"first_name":"korol","network":"google","identity":"https:\/\/plus.google.com\/u\/0\/103603897180461133615\/","uid":"103603897180461133615","profile":"https:\/\/plus.google.com\/103603897180461133615","last_name":"ariya"}
+{"first_name":"Korol-ariya","network":"vkontakte","identity":"http:\/\/vk.com\/id68889220","uid":"68889220","profile":"http:\/\/vk.com\/id68889220","last_name":"Zaqwsx"}

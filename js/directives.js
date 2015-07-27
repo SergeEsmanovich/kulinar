@@ -10,7 +10,7 @@ kulinarControllers.directive('integer', function () {
 
                 console.log($attrs.integer);
 
-                if (INTEGER_REGEXP.test(viewValue)) {
+                if (!isNaN(viewValue)) {
                     // it is valid
                     $scope.newrecept.multipleIngredients.items[$attrs.integer].invalid = 0;
                     return true;

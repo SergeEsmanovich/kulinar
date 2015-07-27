@@ -1,0 +1,10 @@
+{
+    "elements": {
+        "progressbar": {}
+    },
+    "attributes": {
+        "ngf-src": {
+            "context": "img"
+        }
+    }
+}

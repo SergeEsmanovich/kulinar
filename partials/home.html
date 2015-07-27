@@ -8,16 +8,25 @@
     </div>
     <div class="row">
         <div infinite-scroll='Recipes.nextPage()' infinite-scroll-disabled='Recipes.busy' infinite-scroll-distance='0'>
-            <div class="col-md-2" ng-repeat="rec in Recipes.items">
+            <div class="col-md-2 linkblock" ng-repeat="rec in Recipes.items">
                 <a href="#/home/{{rec.alias}}">
                     <div class="panel panel-default block">
                         <div class="panel-heading">
-                            {{rec.name}}                   
+                            <h2>{{rec.name}}</h2>                  
                         </div>
                         <div class="panel-body">
                             <img class="col-md-12" src="{{rec.image}}" alt="">
                         </div>
-                        <div class="panel-footer">Panel footer</div>
+                        <div class="panel-footer">
+                            <ul>
+                                <li ng-repeat="ing in rec.ingredients">
+                                    <span>{{ing.name}}</span>
+                                    <span>{{ing.count}}</span>
+                                    <span>{{ing.shortcut}}</span>
+                                </li>
+                            </ul>
+
+                        </div>
                     </div>
                 </a>
             </div>

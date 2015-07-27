@@ -15,7 +15,8 @@ var kulinarApp = angular.module('kulinarApp', [
     'infinite-scroll',
     'angular-inview',
     'textAngular',
-    'angularFileUpload'
+    'ngFileUpload',
+    'ui.bootstrap'
 ]);
 
 kulinarApp.config(['$routeProvider',
