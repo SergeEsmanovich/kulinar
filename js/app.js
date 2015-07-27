@@ -18,7 +18,7 @@ var kulinarApp = angular.module('kulinarApp', [
     'ngFileUpload',
     'ui.bootstrap',
     'ngAnimate'
-    'akoenig.deckgrid'
+    // 'akoenig.deckgrid'
     // 'codinghitchhiker.mosaic'
 
 ]);

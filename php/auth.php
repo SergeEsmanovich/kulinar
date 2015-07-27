@@ -1,5 +1,4 @@
 <?php
-
 class auth extends Db {
 
     public $login_user;
