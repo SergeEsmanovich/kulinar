@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div infinite-scroll='Recipes.nextPage()' infinite-scroll-disabled='Recipes.busy' infinite-scroll-distance='0'>
-            <div class="col-md-2 linkblock" ng-repeat="rec in Recipes.items">
+            <div ng-class="get_class($index)" class="col-md-2 linkblock" ng-repeat="rec in Recipes.items track by $index">
                 <a href="#/home/{{rec.alias}}">
                     <div class="panel panel-default block">
                         <div class="panel-heading">

@@ -1,29 +1,31 @@
-.ng-isolate-scope{
+.ng-isolate-scope {
     padding: 0px;
 }
-.clear{
-    clear:both;
+
+.clear {
+    clear: both;
 }
-.linkblock{
-    a{
+
+.linkblock {
+    a {
         text-decoration: none;
-        &:hover{
-            li{
-                color:#000;
+        &:hover {
+            li {
+                color: #000;
             }
         }
-        .block{
+        .block {
             overflow: hidden;
             min-height: 300px;
-            &:hover{
-                -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-                -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-                box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+            &:hover {
+                -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+                -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+                box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
             }
-            .panel-heading{
+            .panel-heading {
                 font-family: 'Lobster', cursive;
                 text-decoration: none;
-                h2{
+                h2 {
                     font-size: 18px;
                     margin: 0px;
                     padding: 0px;
@@ -33,24 +35,22 @@
                 height: 200px;
                 padding: 5px;
                 overflow: hidden;
-                img{
-                    width:100%;
+                img {
+                    width: 100%;
                 }
             }
-            .panel-footer{
+            .panel-footer {
                 min-height: 60px;
                 max-height: 250px;
                 overflow: hidden;
-                ul{
-                    li{
+                ul {
+                    li {
                         list-style: none;
                         /*border-bottom:  1px dashed #ccc;*/
                     }
                 }
             }
         }
-
-
     }
 }
 
@@ -63,6 +63,7 @@
     margin: 10px;
     width: 70px;
 }
+
 .drop-box {
     background: #F8F8F8;
     border: 5px dashed #DDD;
@@ -70,16 +71,43 @@
     height: 80px;
     text-align: center;
     padding-top: 25px;
-
 }
+
 .dragover {
     border: 5px dashed blue;
 }
-.file_upload{
+
+.file_upload {
     height: 100px;
 }
-.preview{
-    img{
-        width:100%;
+
+.preview {
+    img {
+        width: 100%;
     }
+}
+
+.mosaicflow__column {
+    float: left;
+}
+
+.mosaicflow__item {
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+    div {
+        @extend img;
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}
+
+.fix-to-top {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
 }

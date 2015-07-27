@@ -71,6 +71,7 @@ class Recipes extends Db {
                 . " WHERE s.recipes_id = $rec_id";
         $this->query();
         $this->structure = $this->LoadObjectList();
+        if($this->structure)
         foreach ($this->structure as $key => $value) {
             if ($value->count == 0) {
                 $value->count = '';

@@ -34,6 +34,10 @@ kulinarApp.config(['$routeProvider',
                     templateUrl: 'partials/recipes-detail.html',
                     controller: 'RecipesDetailCtrl'
                 }).
+                when('/test', {
+                    templateUrl: 'partials/test.html',
+                    controller: 'TestCtrl'
+                }).
                 otherwise({
                     redirectTo: '/home'
                 });
