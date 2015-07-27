@@ -151,6 +151,7 @@ kulinarControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Pho
 //RecipesDetailCtrl
 kulinarControllers.controller('RecipesDetailCtrl', ['$scope', '$http', '$routeParams',
     function ($scope, $http, $routeParams) {
+      $scope.route =  $routeParams;
         $http.get('php/index.php?action=ingredients&recId=' + $routeParams.recId).
                 success(function (data, status, headers, config) {
                     $scope.rec = data;
