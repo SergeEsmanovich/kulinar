@@ -1,6 +1,5 @@
 'use strict';
 /*DB*/
-
 //var db = openDatabase('documents', '1.0', 'Offline document storage', 5 * 1024 * 1024, function (db) {
 //    db.changeVersion('', '1.0', function (t) {
 //        t.executeSql('CREATE TABLE docids (id, name)');
@@ -18,9 +17,6 @@
 //    }, null);
 //
 //});
-
-
-
 /* Controllers */
 var kulinarControllers = angular.module('kulinarControllers', [], function($httpProvider) {
     // Используем x-www-form-urlencoded Content-Type
@@ -57,7 +53,6 @@ var kulinarControllers = angular.module('kulinarControllers', [], function($http
                     query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
                 }
             }
-
             return query.length ? query.substr(0, query.length - 1) : query;
         };
         return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
@@ -65,7 +60,6 @@ var kulinarControllers = angular.module('kulinarControllers', [], function($http
 });
 kulinarControllers.controller('TestCtrl', ['$scope', '$http',
     function($scope, $http) {
-
         $scope.menu = 'test';
     }
 ]);
@@ -76,11 +70,10 @@ kulinarControllers.controller('HomeCtrl', ['$scope', '$http', 'Recipes',
     }
 ]);
 //Добавление рецепта --------------------------------------------------------------------
-kulinarControllers.controller('RecipesCtrl', ['$scope', '$http', '$timeout', 'Upload',
-    function($scope, $http, $timeout, Upload) {
+kulinarControllers.controller('RecipesCtrl', ['$scope', '$http', '$timeout', 'Upload', '$rootScope',
+    function($scope, $http, $timeout, Upload, $rootScope) {
         ///////////////////////////////////////////////
         $scope.progress = [];
-
         $scope.$watch('files', function(files) {
             $scope.progress = [];
             angular.forEach(files, function(value, key) {
@@ -90,54 +83,41 @@ kulinarControllers.controller('RecipesCtrl', ['$scope', '$http', '$timeout', 'Up
                 });
             });
         });
+        $scope.remove_preview = function(index) {
+            $scope.files.splice(index, 1);
+        }
         $scope.upload = function(files) {
             if (files && files.length) {
                 for (var i = 0; i < files.length; i++) {
                     var file = files[i];
                     Upload.upload({
-                        url: '/php/upload.php',
+                        url: '/php/index.php',
                         fields: {
-                            'username': $scope.username
+                            'action': 'upload',
+                            'user': $rootScope.auth.user
                         },
                         file: file
                     }).progress(function(evt) {
                         var procent = parseInt(100.0 * evt.loaded / evt.total);
                         angular.forEach($scope.progress, function(value, key) {
-                            if (evt.config.file.name == value.name)
-                                value.procent = procent;
+                            if (evt.config.file.name == value.name) value.procent = procent;
                         });
                     }).success(function(data, status, headers, config) {
                         console.log(data);
+                        $scope.newrecept.photos = data.photos;
                         //$scope.files = [];
                     });
                 }
             }
         };
-
         ////////////////////////////////////
-
-
         $scope.newrecept = {
             'name': '',
             'multipleIngredients': {
                 'items': []
-            }
+            },
+            photos: []
         }
-
-        $http.get('php/auth.php?action=user').
-        success(function(data, status, headers, config) {
-            $scope.user = data;
-            $scope.newrecept.user = data;
-            if ($scope.user.user_id > 0) {
-                $scope.login = 1;
-            } else {
-                $scope.login = 0;
-            }
-            console.log(data);
-        }).
-        error(function(data, status, headers, config) {
-
-        });
         $scope.ingredients = [{
             'id': 0,
             'name': ''
@@ -176,13 +156,8 @@ kulinarControllers.controller('RecipesCtrl', ['$scope', '$http', '$timeout', 'Up
                     $scope.newrecept.answer = null;
                 }, 2000);
             }).
-            error(function(data, status, headers, config) {
-
-            });
+            error(function(data, status, headers, config) {});
         }
-
-
-
     }
 ]);
 kulinarControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Phone',

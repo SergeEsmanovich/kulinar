@@ -21,7 +21,7 @@ class Upload extends auth {
         if (isset($_POST['user']))
             $user_p = json_decode($_POST['user']);
         $user = json_decode($this->get_user_in());
-        $collation = $user_p->user->token == $user->token ? true : false;
+        $collation = $user_p->token == $user->token ? true : false;
 
         if ($collation) {
             $this->user_id = $user->user_id;
@@ -58,16 +58,18 @@ class Upload extends auth {
         } else {
             $msg['status'] = 0;
             $msg['msg'] = 'Пройдите авторизацию';
+            $msg['user_p'] =$user_p->token;
+            $msg['user'] =  $user->token;
             $this->answer = $msg;
         }
     }
 
     public function out() {
-//        $this->sql = "SELECT *  FROM photos "
-//                . "WHERE user_id='$this->user_id'";
-//        $this->query();
-//        $photos = $this->LoadObjectList();
-//        $this->answer['photos'] = $photos;
+       $this->sql = "SELECT *  FROM photos "
+               . "WHERE user_id='$this->user_id'";
+       $this->query();
+       $photos = $this->LoadObjectList();
+       $this->answer['photos'] = $photos;
         echo json_encode($this->answer);
     }
 
