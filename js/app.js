@@ -16,7 +16,9 @@ var kulinarApp = angular.module('kulinarApp', [
     'angular-inview',
     'textAngular',
     'ngFileUpload',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'akoenig.deckgrid'
+   // 'codinghitchhiker.mosaic'
 ]);
 
 kulinarApp.config(['$routeProvider',

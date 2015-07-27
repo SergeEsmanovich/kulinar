@@ -67,6 +67,13 @@ kulinarControllers.controller('HomeCtrl', ['$scope', '$http', 'Recipes',
     function($scope, $http, Recipes) {
         $scope.Recipes = new Recipes();
         $scope.Recipes.nextPage();
+
+        $scope.$watch(function() {
+            return window.innerWidth;
+        }, function(value) {
+            console.log(value);
+        });
+
         $scope.get_class = function(index) {
             if (index % 2) {
                 return 'pull-right';
@@ -80,12 +87,12 @@ kulinarControllers.controller('HomeCtrl', ['$scope', '$http', 'Recipes',
 kulinarControllers.controller('RecipesCtrl', ['$scope', '$http', '$timeout', 'Upload',
     function($scope, $http, $timeout, Upload) {
         $scope.get_class = function(index, length) {
-              //  if (length > 6) {
-                    if (index % 2) {
-                        return 'pull-right';
-                    } else {
-                        return 'pull-left';
-                    }
+                //  if (length > 6) {
+                if (index % 2) {
+                    return 'pull-right';
+                } else {
+                    return 'pull-left';
+                }
                 // } else {
                 //     return 'pull-left';
                 // }
@@ -209,6 +216,57 @@ kulinarControllers.controller('RecipesDetailCtrl', ['$scope', '$http', '$routePa
 ]);
 kulinarControllers.controller('TestCtrl', ['$scope', '$http', '$routeParams',
     function($scope, $http, $routeParams) {
+        
+ $scope.$watch(function() {
+            return window.innerWidth;
+        }, function(value) {
+            console.log(value);
+        });
+ $(window).resize(function(){
+    $scope.$apply(function(){
+       //do something to update current scope based on the new innerWidth and let angular update the view.
+    });
+});
+
+
+
+        $scope.photos = [{
+            id: 'p1',
+            'title': 'A nice day!',
+            src: "http://lorempixel.com/300/200/"
+        }, {
+            id: 'p2',
+            'title': 'Puh!',
+            src: "http://lorempixel.com/200/400/sports"
+        }, {
+            id: 'p3',
+            'title': 'What a club!',
+            src: "http://lorempixel.com/300/400/nightlife"
+        }, {
+            id: 'p1',
+            'title': 'A nice day!',
+            src: "http://lorempixel.com/300/400/"
+        }, {
+            id: 'p2',
+            'title': 'Puh!',
+            src: "http://lorempixel.com/200/400/sports"
+        }, {
+            id: 'p3',
+            'title': 'What a club!',
+            src: "http://lorempixel.com/300/400/nightlife"
+        }, {
+            id: 'p1',
+            'title': 'A nice day!',
+            src: "http://lorempixel.com/500/400/"
+        }, {
+            id: 'p2',
+            'title': 'Puh!',
+            src: "http://lorempixel.com/300/600/sports"
+        }, {
+            id: 'p3',
+            'title': 'What a club!',
+            src: "http://lorempixel.com/300/400/nightlife"
+        }, ];
         $scope.get_class = function(index) {
             if (index % 2) {
                 return 'pull-left';

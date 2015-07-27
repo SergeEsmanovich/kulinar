@@ -1,0 +1,29 @@
+{
+  "author": "Michel Boudreau",
+  "name": "angular-mosaic",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mboudreau/angular-mosaic.git"
+  },
+  "main": "angular-mosaic.js",
+  "dependencies": {
+    "angular": ">=1.2.0",
+    "bootstrap": "~3.3.1"
+  },
+  "devDependencies": {
+    "angular-mocks": ">=1.2.0"
+  },
+  "ignore": [],
+  "homepage": "https://github.com/mboudreau/angular-mosaic",
+  "_release": "1.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.0",
+    "commit": "a591c391d60f927d299b6208b86fdf6920b10105"
+  },
+  "_source": "git://github.com/mboudreau/angular-mosaic.git",
+  "_target": "~1.0.0",
+  "_originalSource": "angular-mosaic",
+  "_direct": true
+}
