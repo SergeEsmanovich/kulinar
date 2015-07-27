@@ -53,6 +53,20 @@ class Db {
         $this->last_id = mysql_insert_id();
         return $query;
     }
+       function mysql_update($table, $updates, $where) {
+//        $values = array_map('mysql_real_escape_string', array_values($updates));
+//        $keys = array_keys($updates);
+        foreach ($updates as $key => $value) {
+            $str .= " $key = '$value' ";
+        }
+        $this->query = 'UPDATE ' . $table . ' SET ' . $str . ' WHERE  ' . key($where) . ' = ' . " '".current($where)."' ";
+        $query = mysql_query($this->query);
+        if (!$query) {
+            $this->log = mysql_error();
+        }
+        //   $this->last_id = mysql_insert_id();
+        return $query;
+    }
 
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-class Recipes extends Db {
+class Recipes extends auth {
 
     public $recipes;
     public $structure;
@@ -81,8 +81,10 @@ class Recipes extends Db {
 
     function getRecipes($shag) {
         $shag *= 20;
-        $this->sql = "SELECT *  FROM recipes "
-                . "ORDER BY id DESC LIMIT $shag,20";
+        $this->sql = "SELECT recipes.*,  photos.path FROM recipes "
+        ."LEFT JOIN photos  ON photos.rec_id = recipes.id"
+                . " ORDER BY recipes.id DESC LIMIT $shag,20";
+               // die();
 
 
         $this->query();
@@ -146,11 +148,13 @@ class Recipes extends Db {
         //file_put_contents('test.txt', $_POST);
         $recept = json_decode($post['recept']);
 
-        $insert_arr = array('name' => $recept->name, 'process' => $recept->htmlcontent, 'image' => 'images/Golubci.JPG', 'alias' => $this->str2url($recept->name));
+        $user = json_decode($this->get_user_in());
+
+        $insert_arr = array('name' => $recept->name, 'user_id' => $user->user_id, 'process' => $recept->htmlcontent, 'alias' => $this->str2url($recept->name));
         $result = $this->mysql_insert('recipes', $insert_arr);
 
         if (!$result) {
-            return array('msg' => 'Произошла ошибка, рецепт не записался в базу', status => 0);
+            return array('msg' => 'Произошла ошибка, рецепт не записался в базу', status => 0,'query'=>$this->query,'log'=> $this->log);
         }
 
         $rec_id = $this->last_id;
@@ -160,7 +164,10 @@ class Recipes extends Db {
         $ingredients = json_decode($this->getAllIngredients());
         $ingredients = $ingredients->ingredients;
 
-
+         
+        $updates = array('rec_id'=>$rec_id);
+        $where= array('id'=>$recept->main_photo->id);
+        $this->mysql_update('photos', $updates, $where);   
 
 
         foreach ($recept->multipleIngredients->items as $k => $v) {

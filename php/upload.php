@@ -66,7 +66,7 @@ class Upload extends auth {
 
     public function out() {
        $this->sql = "SELECT *  FROM photos "
-               . "WHERE user_id='$this->user_id'";
+               . "WHERE user_id='$this->user_id' ORDER BY id ASC LIMIT 0,20";
        $this->query();
        $photos = $this->LoadObjectList();
        $this->answer['photos'] = $photos;

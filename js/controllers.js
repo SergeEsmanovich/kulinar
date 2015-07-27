@@ -150,6 +150,7 @@ kulinarControllers.controller('RecipesCtrl', ['$scope', '$http', '$timeout', 'Up
                 recept: JSON.stringify(recept)
             }).
             success(function(data, status, headers, config) {
+                console.log(data);
                 $scope.newrecept.answer = data;
                 $scope.checked = 0;
                 $timeout(function() {

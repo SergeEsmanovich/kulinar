@@ -65,7 +65,7 @@
                             <div class="animate-show">
                                 <p>Загруженные изображения</p>
                                 <ul class="list-inline downloaded">
-                                    <li ng-animate="{enter: 'repeat-enter', leave: 'repeat-leave', move: 'repeat-move'}" ng-click="newrecept.main_photo = $index" ng-class="{'active':newrecept.main_photo == $index}" class="col-md-2" ng-repeat="item in newrecept.photos track by $index">
+                                    <li ng-animate="{enter: 'repeat-enter', leave: 'repeat-leave', move: 'repeat-move'}" ng-click="newrecept.main_photo = item" ng-class="{'active':newrecept.main_photo == item}" class="col-md-2" ng-repeat="item in newrecept.photos track by $index">
                                         <img src="{{item.path}}" alt="" class="img-thumbnail">
                                     </li>
                                 </ul>
