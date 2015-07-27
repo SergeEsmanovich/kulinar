@@ -1,5 +1,4 @@
 <div class="container-fluid">
-
     <div class="row">
         <div class="well well-sm"> Поиск и Фильтры, сначала запускаем поиск по странице, а потом поиск по БД</div>
     </div>
@@ -8,11 +7,12 @@
     </div>
     <div class="row">
         <div infinite-scroll='Recipes.nextPage()' infinite-scroll-disabled='Recipes.busy' infinite-scroll-distance='0'>
-            <div class="col-md-2 linkblock" ng-repeat="rec in Recipes.items">
-                <a href="#/home/{{rec.alias}}">
+            <div class="col-md-4 col-lg-3">
+                <div  class="col-md-12 linkblock" ng-repeat="rec in Recipes.items track by $index">
+                    <a href="#/home/{{rec.alias}}">
                     <div class="panel panel-default block">
                         <div class="panel-heading">
-                            <h2>{{rec.name}}</h2>                  
+                            <h2>{{rec.name}}</h2>
                         </div>
                         <div class="panel-body">
                             <img class="col-md-12" src="{{rec.image}}" alt="{{rec.name}}" title="{{rec.name}}">
@@ -25,16 +25,83 @@
                                     <span>{{ing.shortcut}}</span>
                                 </li>
                             </ul>
-
                         </div>
                     </div>
-                </a>
+                    </a>
+                </div>
+            </div>
+             <div class="col-md-4 col-lg-3">
+                <div  class="col-md-12 linkblock" ng-repeat="rec in Recipes.items track by $index">
+                    <a href="#/home/{{rec.alias}}">
+                    <div class="panel panel-default block">
+                        <div class="panel-heading">
+                            <h2>{{rec.name}}</h2>
+                        </div>
+                        <div class="panel-body">
+                            <img class="col-md-12" src="{{rec.image}}" alt="">
+                        </div>
+                        <div class="panel-footer">
+                            <ul>
+                                <li ng-repeat="ing in rec.ingredients">
+                                    <span>{{ing.name}}</span>
+                                    <span>{{ing.count}}</span>
+                                    <span>{{ing.shortcut}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+             <div class="col-md-4 col-lg-3">
+                <div  class="col-md-12 linkblock" ng-repeat="rec in Recipes.items track by $index">
+                    <a href="#/home/{{rec.alias}}">
+                    <div class="panel panel-default block">
+                        <div class="panel-heading">
+                            <h2>{{rec.name}}</h2>
+                        </div>
+                        <div class="panel-body">
+                            <img class="col-md-12" src="{{rec.image}}" alt="">
+                        </div>
+                        <div class="panel-footer">
+                            <ul>
+                                <li ng-repeat="ing in rec.ingredients">
+                                    <span>{{ing.name}}</span>
+                                    <span>{{ing.count}}</span>
+                                    <span>{{ing.shortcut}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+             <div class="col-md-4 col-lg-3">
+                <div  class="col-md-12 linkblock" ng-repeat="rec in Recipes.items track by $index">
+                    <a href="#/home/{{rec.alias}}">
+                    <div class="panel panel-default block">
+                        <div class="panel-heading">
+                            <h2>{{rec.name}}</h2>
+                        </div>
+                        <div class="panel-body">
+                            <img class="col-md-12" src="{{rec.image}}" alt="">
+                        </div>
+                        <div class="panel-footer">
+                            <ul>
+                                <li ng-repeat="ing in rec.ingredients">
+                                    <span>{{ing.name}}</span>
+                                    <span>{{ing.count}}</span>
+                                    <span>{{ing.shortcut}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-
 </div>
-
 <!--<div in-view="LoadNext()">
 </div>-->
 <div class="well well-sm"></div>

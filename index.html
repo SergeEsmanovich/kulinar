@@ -5,102 +5,85 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href='http://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-        <link rel="icon" type="image/png" href="images/icon.png" />
-        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/animations.css">
-        <link rel="stylesheet" href="css/style.css">
-        <div></div>
-
-
-        <!-- Fix for old browsers -->
-        <!--        <script src="bower_components/es5-shim/es5-shim.min.js"></script>
-                <script src="bower_components/es5-shim/es5-sham.js"></script>
-                <script src="bower_components/angular-file-upload-master/examples/console-sham.min.js"></script>-->
-
-        <script src="bower_components/jquery/dist/jquery.js"></script>
-        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-
-        <!--<script src="http://code.angularjs.org/1.1.5/angular.min.js"></script>-->
-        <script src="bower_components/angular/angular.min.js"></script>
-        <script src="bower_components/angular-animate/angular-animate.js"></script>
-        <script src="bower_components/angular-route/angular-route.js"></script>
-        <script src="bower_components/angular-resource/angular-resource.js"></script>
-        <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-        <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js"></script>
-        <!--<script src="bower_components/angular-mocks/angular-mocks.js">-->
-
-
-        <!-- ui-select files -->
-        <script src="components/select2/select.min.js"></script>
-        <link rel="stylesheet" href="components/select2/select.min.css ">
-
-        <!--scroll-->
-        <!--<script src="bower_components/angular-scroll/angular-scroll.min.js"></script>-->
-
-        <!--inview-->
-        <script src="bower_components/angular-inview/angular-inview.js"></script>
-
-        <!--textAngular-->
-        <script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.2.2/textAngular-sanitize.min.js'></script>
-        <script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.2.2/textAngular.min.js'></script>
-
-
-
-        <!--<script src="bower_components/angularjs-file-upload/angular-file-upload.min.js"></script>-->
-        <script src='bower_components/ng-file-upload/ng-file-upload-shim.min.js'></script>
-        <script src='bower_components/ng-file-upload/ng-file-upload.min.js'></script>
-        <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-
-        <script src="js/app.js"></script>
-        <script src="js/animations.js"></script>
-        <script src="js/controllers.js"></script>
-        <script src="js/filters.js"></script>
-        <script src="js/services.js"></script>
-        <script src="js/directives.js"></script>
-
-
-
-
-    </head>
-    <body>
-        <menu></menu>
-        <div id="doc-count">
-
-        </div>
-        <div class="view-container">
-            <div ng-view class="view-frame"></div>
-        </div>
-  <!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function (d, w, c) {
-        (w[c] = w[c] || []).push(function() {
-            try {
-                w.yaCounter31252658 = new Ya.Metrika({
-                    id:31252658,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true,
-                    webvisor:true,
-                    trackHash:true
-                });
-            } catch(e) { }
-        });
-
-        var n = d.getElementsByTagName("script")[0],
-            s = d.createElement("script"),
-            f = function () { n.parentNode.insertBefore(s, n); };
-        s.type = "text/javascript";
-        s.async = true;
-        s.src = "https://mc.yandex.ru/metrika/watch.js";
-
-        if (w.opera == "[object Opera]") {
-            d.addEventListener("DOMContentLoaded", f, false);
-        } else { f(); }
-    })(document, window, "yandex_metrika_callbacks");
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/31252658" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-    </body>
-</html>
+            <link rel="icon" type="image/png" href="images/icon.png" />
+            <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+            <link rel="stylesheet" href="css/font-awesome.min.css">
+            <link rel="stylesheet" href="css/animations.css">
+            <link rel="stylesheet" href="css/style.css">
+            <!-- <link rel="stylesheet" href="/bower_components/angular-mosaic/angular-mosaic.css"> -->
+            <script src="/bower_components/masonry/dist/masonry.pkgd.min.js"></script>
+            <div></div>
+            <!-- Fix for old browsers -->
+            <!--        <script src="bower_components/es5-shim/es5-shim.min.js"></script>
+            <script src="bower_components/es5-shim/es5-sham.js"></script>
+            <script src="bower_components/angular-file-upload-master/examples/console-sham.min.js"></script>-->
+            <script src="bower_components/jquery/dist/jquery.js"></script>
+            <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+            <!--<script src="http://code.angularjs.org/1.1.5/angular.min.js"></script>-->
+            <script src="bower_components/angular/angular.min.js"></script>
+            <script src="bower_components/angular-animate/angular-animate.js"></script>
+            <script src="bower_components/angular-route/angular-route.js"></script>
+            <script src="bower_components/angular-resource/angular-resource.js"></script>
+            <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+            <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js"></script>
+            <!--<script src="bower_components/angular-mocks/angular-mocks.js">-->
+            <!-- ui-select files -->
+            <script src="components/select2/select.min.js"></script>
+            <link rel="stylesheet" href="components/select2/select.min.css ">
+            <!--scroll-->
+            <!--<script src="bower_components/angular-scroll/angular-scroll.min.js"></script>-->
+            <!--inview-->
+            <script src="bower_components/angular-inview/angular-inview.js"></script>
+            <!--textAngular-->
+            <script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.2.2/textAngular-sanitize.min.js'></script>
+            <script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.2.2/textAngular.min.js'></script>
+            <!--<script src="bower_components/angularjs-file-upload/angular-file-upload.min.js"></script>-->
+            <script src='bower_components/ng-file-upload/ng-file-upload-shim.min.js'></script>
+            <script src='bower_components/ng-file-upload/ng-file-upload.min.js'></script>
+            <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+            <script src="/bower_components/angular-deckgrid/angular-deckgrid.js"></script>
+           
+            <script src="js/app.js"></script>
+            <script src="js/animations.js"></script>
+            <script src="js/controllers.js"></script>
+            <script src="js/filters.js"></script>
+            <script src="js/services.js"></script>
+            <script src="js/directives.js"></script>
+        </head>
+        <body>
+            <menu></menu>
+            <div id="doc-count">
+            </div>
+            <div class="view-container">
+                <div ng-view class="view-frame"></div>
+            </div>
+            <!-- Yandex.Metrika counter -->
+            <script type="text/javascript">
+                            (function (d, w, c) {
+                                (w[c] = w[c] || []).push(function() {
+                                    try {
+                                        w.yaCounter31252658 = new Ya.Metrika({
+                                            id:31252658,
+                                            clickmap:true,
+                                            trackLinks:true,
+                                            accurateTrackBounce:true,
+                                            webvisor:true,
+                                            trackHash:true
+                                        });
+                                    } catch(e) { }
+                                });
+                                var n = d.getElementsByTagName("script")[0],
+                                    s = d.createElement("script"),
+                                    f = function () { n.parentNode.insertBefore(s, n); };
+                                s.type = "text/javascript";
+                                s.async = true;
+                                s.src = "https://mc.yandex.ru/metrika/watch.js";
+                                if (w.opera == "[object Opera]") {
+                                    d.addEventListener("DOMContentLoaded", f, false);
+                                } else { f(); }
+                            })(document, window, "yandex_metrika_callbacks");
+            </script>
+            <noscript><div><img src="https://mc.yandex.ru/watch/31252658" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+            <!-- /Yandex.Metrika counter -->
+        </body>
+    </html>

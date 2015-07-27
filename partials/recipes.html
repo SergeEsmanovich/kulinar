@@ -50,6 +50,7 @@
                     </div>
                     <div class="row">   
                         <div class="col-md-12">
+<<<<<<< HEAD
                             <div class="animate-show">
                                 <p>Предпросмотр изображения</p>
                                 <ul class="list-inline preview">
@@ -69,6 +70,14 @@
                                     </li>
                                 </ul>
                             </div>
+=======
+                            <ul class="list-unstyled preview">
+                                <li ng-class="get_class($index,files.length)" class="col-md-2" ng-repeat="image in files track by $index">
+                                    <img class="img-thumbnail" ngf-src="image" /> 
+                                <progressbar max="100" value="progress[$index].procent"><span>{{progress[$index].procent}} / {{100}}</span></progressbar>
+                                </li>
+                            </ul>
+>>>>>>> ba975f43dd93aa7525fe8f2771281dbb8e22c594
                         </div>
                     </div>
 
