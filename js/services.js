@@ -23,8 +23,8 @@ kulinarServices.factory('Recipes', ['$http',
             var url = "php/index.php?shag=" + this.page;
             $http.get(url).
                     success(function (data, status, headers, config) {
-                        console.log(data);
-                        console.log(url);
+                       // console.log(data);
+                       // console.log(url);
                         if (data.msg != 'end') {
 //                            data = typeof data !== 'undefined' ? data : [];
 //                            if (data.length > 0) {
