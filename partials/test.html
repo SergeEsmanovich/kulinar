@@ -1,11 +1,9 @@
-<div>test</div>
 
-
-<div deckgrid class="deckgrid" source="photos">
-    <div class="a-card">
-        <h1>{{card.title}}</h1>
-
-        <img src="" data-ng-src="{{card.src}}">
+<div class="mytestblock" ng-repeat="col in colums track by $index" ng-class="get_class()">
+    <div class="item" ng-repeat="item in col">
+			<div>{{item.text}}</div>
+			<div ng-repeat="ing in item.ing">
+				{{ing}}
+			</div>
     </div>
 </div>
-
