@@ -59,72 +59,59 @@ var kulinarControllers = angular.module('kulinarControllers', [], function($http
     }];
 });
 kulinarControllers.controller('TestCtrl', ['$scope', '$http', '$rootScope',
-    function($scope, $http, $rootScope) {
-        $scope.menu = 'test';
-        $rootScope.windowWidth;
-        $scope.colums = [1, 2, 3, 4, 5, 6];
-        $scope.items = [
-        {id:1, text:'test1',ing:[1,2,3,4,5,6,7]},
-        {id:2, text:'test2',ing:[1,2,3,4,5,6,7]},
-        {id:3, text:'test3',ing:[1,2,3,4]},
-        {id:4, text:'test4',ing:[1,2,3,4]},
-        {id:5, text:'test5',ing:[1,2,3,4,5,6,7]},
-        {id:6, text:'test6',ing:[1,2,3,4,5,6,7]},
-        {id:7, text:'test7',ing:[1,2,3,4,5,6,7]},
-        {id:8, text:'test8',ing:[1,2,3]},
-        {id:9, text:'test9',ing:[1,2,3,4,5,6,7]},
-        {id:10, text:'test10',ing:[1,2]},
-        {id:11, text:'test11',ing:[1,2,3,4,5,6,7]},
-        {id:12, text:'test12',ing:[1,2,6,7]},
-        {id:13, text:'test13',ing:[1,2,3,4,5,6,7]}
-        ];
+    function($scope, $http, $rootScope) {}
 
-        var format = function(items, count_colums){
-           var colums = [];
-           var index = [];
-           for (var i = 0; i < count_colums; i++) {
+]);
+kulinarControllers.controller('HomeCtrl', ['$scope', '$http', 'Recipes',
+    function($scope, $http, Recipes) {
+        $scope.Recipes = new Recipes();
+        $scope.Recipes.nextPage();
+        $scope.colums = [1, 2, 3, 4, 5, 6];
+
+        var format = function(items, count_colums) {
+            var colums = [];
+            var index = [];
+            for (var i = 0; i < count_colums; i++) {
                 index[i] = 0;
                 colums[i] = new Array();
-           }
-            angular.forEach(items, function(val,key){
+            }
+            angular.forEach(items, function(val, key) {
                 //Есть элемент нужно определить куда го положить
                 //Найдем минимальный элемент и все время будем складировать в минимум
                 var min = index[0];
                 var ind = 0;
                 for (var i = 1; i < index.length; i++) {
-                  if(index[i] < min){
-                     min =  index[i];
-                     ind = i;
-                  }
+                    if (index[i] < min) {
+                        min = index[i];
+                        ind = i;
+                    }
                 };
                 //Нашли минимальный индекс
-                index[ind] = min + val.ing.length;
+                index[ind] = min + val.ingredients.length;
                 colums[ind].push(val);
             });
             $scope.colums = colums;
         }
-        
-       
-
+        format($scope.Recipes.items, 6);
         $scope.$watch('windowWidth', function(newVal, oldVal) {
             switch (true) {
                 case newVal < 600:
-                    format($scope.items,1);
+                    format($scope.Recipes.items, 1);
                     break;
                 case newVal < 700:
-                    format($scope.items,2);
+                    format($scope.Recipes.items, 2);
                     break;
                 case newVal < 900:
-                    format($scope.items,3);
+                    format($scope.Recipes.items, 3);
                     break;
                 case newVal < 1200:
-                    format($scope.items,4);
+                    format($scope.Recipes.items, 4);
                     break;
                 case newVal < 1400:
-                    format($scope.items,4);
+                    format($scope.Recipes.items, 4);
                     break;
                 default:
-                    format($scope.items,6);
+                    format($scope.Recipes.items, 6);
                     break;
             }
         });
@@ -142,7 +129,6 @@ kulinarControllers.controller('TestCtrl', ['$scope', '$http', '$rootScope',
                 case 4:
                     return 'col-md-3 col-sm-3 col-xs-3';
                     break;
-                
                 default:
                     return 'col-md-2 col-sm-2 col-xs-2';
                     break;
@@ -150,15 +136,12 @@ kulinarControllers.controller('TestCtrl', ['$scope', '$http', '$rootScope',
         }
     }
 ]);
-kulinarControllers.controller('HomeCtrl', ['$scope', '$http', 'Recipes',
-    function($scope, $http, Recipes) {
-        $scope.Recipes = new Recipes();
-        $scope.Recipes.nextPage();
-    }
-]);
 //Добавление рецепта --------------------------------------------------------------------
-kulinarControllers.controller('RecipesCtrl', ['$scope', '$http', '$timeout', 'Upload', '$rootScope',
-    function($scope, $http, $timeout, Upload, $rootScope) {
+kulinarControllers.controller('RecipesCtrl', ['$scope', '$http', '$timeout', 'Upload', '$rootScope', 'Categories',
+    function($scope, $http, $timeout, Upload, $rootScope, Categories) {
+
+        $scope.Categories = new Categories();
+        $scope.Categories.LoadCategories();
         ///////////////////////////////////////////////
         $scope.progress = [];
         $scope.$watch('files', function(files) {
@@ -218,7 +201,7 @@ kulinarControllers.controller('RecipesCtrl', ['$scope', '$http', '$timeout', 'Up
         success(function(data, status, headers, config) {
             $scope.ingredients = data.ingredients;
             $scope.units = data.units;
-            console.log($scope.units);
+            // console.log($scope.units);
         }).
         error(function(data, status, headers, config) {});
         $scope.multipleUnits = {};

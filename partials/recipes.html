@@ -77,7 +77,17 @@
                     </div>
 
                     <div class="clear"></div>
-
+                     <h4>Выберите категорию</h4> 
+                     <div class="row">
+                         <div class="col-md-4">
+                             <ui-select  ng-model="newrecept.cat" theme="bootstrap">
+                                    <ui-select-match placeholder="Выберите категорию из списка.... ">{{$select.selected.name}}</ui-select-match>
+                                    <ui-select-choices repeat="item in Categories.items | filter: $select.search">
+                                        <div ng-bind-html="item.name | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                             </ui-select>
+                         </div>
+                     </div>  
                     <h4>Выберите инредиенты из списка или добавьте новые</h4>
                     <div class="row">
                         <div class="col-md-4">

@@ -26,6 +26,11 @@ switch ($action) {
             echo $recipes->getAllIngredients();
         }
         break;
+    case 'categories':
+     header('Content-Type: application/json');
+     $recipes = new Recipes();
+     echo $recipes->get_categories();
+    break;    
     case 'add_recipes':
         header('Content-Type: application/json');
         $recipes = new Recipes();

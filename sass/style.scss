@@ -16,7 +16,7 @@
         }
         .block {
             overflow: hidden;
-            min-height: 300px;
+           // min-height: 300px;
             &:hover {
                 -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
                 -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
@@ -32,7 +32,7 @@
                 }
             }
             .panel-body {
-                height: 200px;
+               // height: 200px;
                 padding: 5px;
                 overflow: hidden;
                 img {
@@ -171,14 +171,14 @@
 }
 
 
-.mytestblock{
-    border: 1px solid red;
-    min-height: 400px;
-    .item{
-        padding:20px;
-        border:1px solid #000;
-        margin: 10px;
-    }
-}
+// .mytestblock{
+//     border: 1px solid red;
+//     min-height: 400px;
+//     .item{
+//         padding:20px;
+//         border:1px solid #000;
+//         margin: 10px;
+//     }
+// }
 
 

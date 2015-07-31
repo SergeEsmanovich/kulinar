@@ -28,7 +28,8 @@ class Upload extends auth {
             if (!empty($_FILES)) {
                 //Нужно еще сделать проверку на тип файлов
                 $tempPath = $_FILES['file']['tmp_name'];
-                $uploadPath = '../uploads' . DIRECTORY_SEPARATOR . $_FILES['file']['name'];
+                $uploadPath = '../uploads' . DIRECTORY_SEPARATOR . $user->user_id .'_'.  $_FILES['file']['name'] ;
+
                 move_uploaded_file($tempPath, $uploadPath);
 
                 //Запись изображения в базу
